@@ -1,4 +1,5 @@
 import { Link } from "@inertiajs/react";
+import { Logout, ManageAccounts } from "@mui/icons-material";
 import React, { useEffect, useRef, useState } from "react";
 
 function Account() {
@@ -24,10 +25,10 @@ function Account() {
             } flex justify-between items-center gap-3 relative cursor-pointer  py-1 px-2 rounded-sm`}
         >
             <div className="flex flex-col tracking-tight leading-3 text-right">
-                <p className="capitalize text-[7pt] font-semibold text-slate-950 dark:text-white">
+                <p className="capitalize text-[8pt] md:text-[10pt] lg:text-sm font-semibold text-slate-950 dark:text-white">
                     Guntur Madjid
                 </p>
-                <p className="text-slate-950 dark:text-white text-[8pt]">
+                <p className="text-slate-950 dark:text-white text-[8pt] md:text-[10pt lg:text-sm">
                     Admin
                 </p>
             </div>
@@ -36,10 +37,19 @@ function Account() {
             </div>
             <div
                 className={`${
-                    open ? "opacity-100 max-h-full" : " opacity-0 max-h-0"
-                } absolute left-0 top-9 w-[100px] bg-slate-200 dark:bg-slate-900 h-[200px] usetransition rounded-sm border border-slate-500/50`}
+                    open ? "opacity-100 max-h-full" : "opacity-0  max-h-0"
+                } absolute right-0 top-12 w-[180px] bg-slate-200 dark:bg-slate-900 overflow-y-hidden usetransition rounded-sm border border-slate-500/50`}
             >
-                <Menu name={"Setting Profile"} />
+                <Menu
+                    icon={
+                        <ManageAccounts children="inherit" fontSize="inherit" />
+                    }
+                    name={"Setting Profile"}
+                />
+                <Menu
+                    icon={<Logout children="inherit" fontSize="inherit" />}
+                    name={"Logout"}
+                />
             </div>
         </div>
     );
@@ -49,7 +59,7 @@ function Menu({ icon, name, url }) {
     return (
         <Link
             href={url}
-            className="px-3 hover:bg-slate-300 hover:dark:bg-slate-800 flex gap-2 items-center tracking-tighter text-[8pt] dark:text-slate-200"
+            className="px-3 hover:bg-slate-300 hover:dark:bg-slate-800 flex gap-2 items-center tracking-tighter text-[8pt] md:text-sm lg:text-base dark:text-slate-200"
         >
             <div>{icon}</div>
             <p>{name}</p>
