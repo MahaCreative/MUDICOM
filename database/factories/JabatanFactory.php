@@ -17,7 +17,7 @@ class JabatanFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama_jabatan' => $this->faker->sentence(),
+            'nama_jabatan' => $this->faker->word(1),
             'gaji' => rand(1000, 9999)
         ];
     }

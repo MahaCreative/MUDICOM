@@ -1,40 +1,41 @@
 import { Link } from "@inertiajs/react";
 import { Cancel, MenuOpen, MoreVert } from "@mui/icons-material";
 import React, { useEffect, useRef, useState } from "react";
+import Pagination from "../Pagination/Pagination";
+import Load from "../Filter/Load";
+import Search from "../Filter/Search";
 
-function Table({ children }) {
+function Table({ children, length, links, current_page, params, setParams }) {
     return (
-        <div className=" bg-slate-200/90 dark:bg-slate-900/50 rounded-md shadow-sm dark:shadow-black py-2 px-2">
-            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                {/* <tbody>
-                    {jabatan.length > 0 &&
-                        jabatan.map((item, key) => (
-                            <tr
-                                key={key}
-                                class=" border-b dark:bg-gray-800 dark:border-boxdark hover:dark:bg-slate-900 hover:bg-slate-100 odd:dark:bg-slate-900/50 odd:bg-slate-200/50 text-slate-950 dark:text-white"
-                            >
-                                <td className="py-3 text-center w-[100px]">
-                                    {key + 1}
-                                </td>
-                                <td className="py-3 ">{item.nama_jabatan}</td>
-                                <td className="py-3 ">{item.gaji}</td>
-                            </tr>
-                        ))}
-                </tbody> */}
+        <div className=" bg-slate-200/90 dark:bg-slate-900/50 rounded-md shadow-sm dark:shadow-black py-2 px-2 max-w-full overflow-x-auto overflow-y-hidden">
+            <div className="flex gap-2 items-start">
+                <Load params={params} setParams={setParams} length={length} />
+
+                <Search params={params} setParams={setParams} />
+            </div>
+            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto">
                 {children}
             </table>
+            <div className="mt-3">
+                <Pagination
+                    links={links}
+                    currentPage={current_page}
+                    params={params}
+                    setParams={setParams}
+                />
+            </div>
         </div>
     );
 }
 
-function thead({ children }) {
+function Thead({ children }) {
     return (
-        <thead className="text-xs text-slate-950 dark:text-white text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <thead className="text-xs text-slate-950 dark:text-white text-gray-700 capitalize bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             {children}
         </thead>
     );
 }
-function th({ children, className }) {
+function Th({ children, className }) {
     return (
         <th
             scope="col"
@@ -47,21 +48,21 @@ function th({ children, className }) {
     );
 }
 
-function tbody({ children }) {
+function Tbody({ children }) {
     return <tbody>{children}</tbody>;
 }
-function td({ children, className }) {
+function Td({ children, className }) {
     return (
         <td
             className={`${
                 className ? className : ""
-            } px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-slate-950`}
+            } px-6 py-4 capitalize font-medium text-gray-900 whitespace-nowrap dark:text-white text-slate-950`}
         >
             {children}
         </td>
     );
 }
-function tr({ children, className }) {
+function Tr({ children, className }) {
     return (
         <tr
             className={`${
@@ -73,12 +74,12 @@ function tr({ children, className }) {
     );
 }
 
-function menu({ children }) {
+function Menu({ children, position = "right-4" }) {
     const [openMenu, setOPenMenu] = useState(false);
     const menuRef = useRef();
     useEffect(() => {
         let handler = (e) => {
-            if (menuRef.current && !menuRef.current.contains(e.target)) {
+            if (!menuRef.current.contains(e.target)) {
                 setOPenMenu(false);
             }
         };
@@ -105,7 +106,7 @@ function menu({ children }) {
                     openMenu
                         ? "h-fit opacity-100 top-0 z-[50]"
                         : "opacity-0 -top-2"
-                } absolute  right-5 w-fit bg-slate-200/59 py-1 px-1.5 dark:bg-slate-900 shadow shadow-slate-50 dark:shadow-boxdark border border-gray dark:border-boxdark rounded-md bg-white usetransition overflow-hidden   text-left text-slate-950 dark:text-white`}
+                } absolute  ${position} w-fit bg-slate-200/59 py-1 px-1.5 dark:bg-slate-900 shadow shadow-slate-50 dark:shadow-boxdark border border-gray dark:border-boxdark rounded-md bg-white usetransition overflow-hidden   text-left text-slate-950 dark:text-white`}
             >
                 {children}
             </div>
@@ -113,7 +114,7 @@ function menu({ children }) {
     );
 }
 
-function link({ children, ...props }) {
+function LinkMenu({ children, ...props }) {
     return (
         <Link
             {...props}
@@ -124,12 +125,12 @@ function link({ children, ...props }) {
         </Link>
     );
 }
-Table.td = td;
-Table.tr = tr;
-Table.tbody = tbody;
-Table.menu = menu;
-Table.link = link;
-Table.th = th;
-Table.thead = thead;
+Table.Td = Td;
+Table.Tr = Tr;
+Table.Tbody = Tbody;
+Table.Menu = Menu;
+Table.LinkMenu = LinkMenu;
+Table.Th = Th;
+Table.Thead = Thead;
 
 export default Table;

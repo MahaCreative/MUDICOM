@@ -39,19 +39,19 @@ export default function AuthLayout({ children, title }) {
                 </div>
             </div>
             {/*Container */}
-            <div className="flex justify-between h-[90vh] bg-slate-100 dark:bg-slate-950">
+            <div className="flex justify-between h-fit bg-slate-100 dark:bg-slate-950">
                 <SidebarDesktop
                     open={openSidebar}
                     setOpen={setOpenSidebar}
                     triggerRef={triggerRef}
                 />
-                <div className=" w-full h-full overflow-y-auto bg-slate-100/90 dark:bg-slate-900/30 relative">
-                    <div className="px-3 py-2">
+                <div className=" w-full overflow-y-auto bg-slate-100/90 dark:bg-slate-900/30 relative">
+                    <div className="px-3 py-2 max-h-[85vh] overflow-y-auto">
                         {/* Contoh */}
 
                         {children}
                     </div>
-                    <div className="bg-white dark:bg-slate-950 w-full py-2 absolute left-0 bottom-0 flex justify-end px-4">
+                    <div className="bg-white dark:bg-slate-950 w-full py-2  fixed left-0 bottom-0 flex justify-end px-4">
                         <p className="text-xs">Copy Right @ Mahacreative</p>
                     </div>
                 </div>

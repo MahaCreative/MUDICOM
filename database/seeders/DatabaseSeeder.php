@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\DataPetugas;
 use Illuminate\Database\Seeder;
 use App\Models\Jabatan;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -14,7 +15,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Jabatan::factory(10)->create();
-        DataPetugas::factory(10)->create();
+        Jabatan::factory(500)->hasPetugas(10)->create();
     }
 }
